@@ -7,24 +7,44 @@ import java.sql.SQLException;
 import model.Admin;
 
 public class AdminDAO {
-    // Câu lệnh SQL để truy vấn admin theo username và password
-    private static final String SELECT_ADMIN = 
-        "SELECT AdminID, Username, Password, FullName, Email FROM Admin WHERE Username = ? AND Password = ?";
+    
+    // Phương thức kiểm tra đăng nhập (có hay không)
+    public static boolean login(String username, String password) {
+        String query = "SELECT * FROM Admin WHERE Username = ? AND Password = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+            
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next(); // Nếu có dữ liệu trả về => đăng nhập thành công
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
+    // Phương thức lấy Admin theo username & password
     public Admin getAdminByUsernameAndPassword(String username, String password) {
+        String query = "SELECT * FROM Admin WHERE Username = ? AND Password = ?";
         Admin admin = null;
-        try (Connection conn = MySQLConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_ADMIN)) {
-            stmt.setString(1, username);
-            stmt.setString(2, password);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("AdminID");
-                String uname = rs.getString("Username");
-                String pwd = rs.getString("Password");
-                String fullName = rs.getString("FullName");
-                String email = rs.getString("Email");
-                admin = new Admin(id, uname, pwd, fullName, email);
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    admin = new Admin();
+                    admin.setAdminID(rs.getInt("AdminID"));
+                    admin.setUsername(rs.getString("Username"));
+                    admin.setPassword(rs.getString("Password")); // Trong thực tế nên dùng Hash mật khẩu
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

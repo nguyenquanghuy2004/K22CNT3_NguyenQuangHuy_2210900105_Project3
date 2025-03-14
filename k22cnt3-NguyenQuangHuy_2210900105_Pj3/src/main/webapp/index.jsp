@@ -4,103 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang Chủ - Quản Lý Lương Doanh Nghiệp</title>
+    <title>Trang Quản Lý - Quản Lý Lương Doanh Nghiệp</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            background-color: #eef1f5;
+            display: flex;
             font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
         }
-        .navbar {
-            background: #1e3a8a;
-        }
-        .navbar-brand, .nav-link {
-            color: #ffffff !important;
-        }
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 350px;
-            background: linear-gradient(135deg, #1e3a8a 40%, #4f46e5 100%);
+
+        .sidebar {
+            width: 200px;
+            background-color: #343a40;
             color: white;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 32px;
-            font-weight: bold;
-        }
-        .content {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1100px;
-            margin: 50px auto;
             padding: 20px;
-            background: white;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-            border-radius: 10px;
+            height: 100vh;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
         }
-        .content-text {
-            max-width: 50%;
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
         }
-        .btn-primary {
-            background: #1e3a8a;
-            border: none;
-            padding: 12px 24px;
-            font-size: 16px;
-            font-weight: bold;
+
+        .sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: white;
+            text-decoration: none;
             border-radius: 5px;
+            transition: background-color 0.3s;
         }
-        .btn-primary:hover {
-            background: #152a68;
+
+        .sidebar a:hover, .sidebar a.active {
+            background-color: #5a6268;
         }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
         .footer {
-            background: #1e3a8a;
+            background-color: #343a40;
             color: white;
             padding: 15px 0;
             text-align: center;
-            margin-top: 50px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="index.jsp">Quản Lý Lương</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.jsp">Trang chủ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.jsp">Đăng nhập</a></li>
-                    <li class="nav-item"><a class="nav-link" href="register.jsp">Đăng ký</a></li>
-                    <li class="nav-item"><a class="nav-link" href="dashboard.jsp">Bảng lương</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>Quản lý lương doanh nghiệp dễ dàng và hiệu quả</h1>
+    <div class="sidebar">
+        <ul>
+            <li><a href="Employee.jsp"><i class="fas fa-users"></i> Nhân viên</a></li>
+            <li><a href="AttendanceServlet"><i class="fas fa-calendar-alt"></i> Chấm công</a></li>
+            <li><a href="payroll.jsp"><i class="fas fa-file-invoice-dollar"></i> Bảng lương</a></li>
+            
+            <li><a href="LoginServlet?action=logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+        </ul>
     </div>
 
-    <!-- Nội dung chính -->
-    <div class="content">
-        <div class="content-text">
-            <h2>Hệ thống quản lý lương chuyên nghiệp</h2>
-            <p>Theo dõi bảng lương, chấm công và quản lý nhân sự với giao diện đơn giản, dễ sử dụng.</p>
-            <a href="register.jsp" class="btn btn-primary">Bắt đầu ngay</a>
+    <div class="main-content">
+        <h2 class="feature-title">Trang Quản Lý</h2>
+        <p>Chào mừng đến với trang quản lý lương doanh nghiệp.</p>
         </div>
-        <div>
-            <img src="images/salary-dashboard.png" alt="Dashboard Preview" width="400">
-        </div>
-    </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <p>&copy; 2025 Quản Lý Lương | Designed by YourName</p>
     </footer>
